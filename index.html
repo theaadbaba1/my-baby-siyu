@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>For Siya 💖</title>
+  <!-- optional cute font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --pink:#ff4d6d;
+      --bg:#ffe6f0;
+      --text:#d63384;
+    }
+    *{box-sizing:border-box}
+    html,body{
+      height:100%;
+      margin:0;
+    }
+    body{
+      font-family:Poppins, system-ui, -apple-system, Arial, sans-serif;
+      background:var(--bg);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+    }
+    .container{
+      text-align:center;
+      max-width:750px;
+    }
+    .header_text{
+      font-size:24px;
+      line-height:1.4;
+      color:var(--text);
+      margin:0 0 16px 0;
+      font-weight:600;
+    }
+    .gif_container img{
+      width:min(260px, 70vw);
+      height:auto;
+      border-radius:16px;
+      display:block;
+      margin:0 auto 16px;
+      box-shadow:0 8px 24px rgba(0,0,0,.08);
+    }
+    .buttons{
+      position:relative;
+      height:120px; /* space for the naughty 'No' to run around */
+    }
+    .btn{
+      padding:12px 22px;
+      font-size:18px;
+      border:none;
+      border-radius:14px;
+      cursor:pointer;
+      transition:transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+      box-shadow:0 6px 16px rgba(0,0,0,.12);
+      user-select:none;
+    }
+    #yesButton{
+      background:var(--pink);
+      color:#fff;
+      margin-right:12px;
+    }
+    #yesButton:active{ transform:scale(.98) }
+    #noButton{
+      background:#e5e5e5;
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%, -50%);
+    }
+    /* tiny confetti vibe for yes page modal */
+    .overlay{
+      position:fixed; inset:0; display:none;
+      background:rgba(255,240,245,.88);
+      align-items:center; justify-content:center;
+      text-align:center; padding:24px;
+    }
+    .overlay h1{
+      color:var(--text); font-size:28px; margin:0 0 8px 0;
+    }
+    .overlay p{ margin:0; color:#7a2d55 }
+    .show{ display:flex }
+    /* mobile tweaks */
+    @media (max-width:480px){
+      .header_text{ font-size:20px }
+      .btn{ font-size:16px; padding:11px 18px }
+      .buttons{ height:140px }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="header_text">
+      Siya, will you be mine forever? 💍<br/>
+      kuch bhi ho jaye—jitne marzi ups & downs aaye—main hamesha tumhe hi choose karunga ❤️
+    </h1>
+
+    <div class="gif_container">
+      <img src="https://i.postimg.cc/pdNqPxx1/milk-and-mocha-cute.gif" alt="Cute animated illustration">
+    </div>
+
+    <div class="buttons">
+      <button class="btn" id="yesButton">Yes 💕</button>
+      <button class="btn" id="noButton">No 😜</button>
+    </div>
+  </div>
+
+  <!-- success message (same page, no separate file needed) -->
+  <div class="overlay" id="overlay">
+    <div>
+      <h1>Yayyy Siya! 💕 You’re mine forever 🥰💍</h1>
+      <p>i love uuuuuuuuuuu innnnaaaaaaaa saraaaaaaaa 😌</p>
+    </div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById('yesButton');
+    const noBtn  = document.getElementById('noButton');
+    const overlay = document.getElementById('overlay');
+
+    // show cute success without leaving page
+    yesBtn.addEventListener('click', () => {
+      overlay.classList.add('show');
+    });
+
+    function moveButton(){
+      const btn = noBtn;
+      const pad = 20; // a little breathing room from edges
+
+      const maxX = window.innerWidth  - btn.offsetWidth  - pad;
+      const maxY = window.innerHeight - btn.offsetHeight - pad;
+
+      const x = Math.max(pad, Math.random() * maxX);
+      const y = Math.max(pad, Math.random() * maxY);
+
+      btn.style.left = x + 'px';
+      btn.style.top  = y + 'px';
+    }
+
+    // run-away behavior
+    noBtn.addEventListener('mouseover', moveButton);
+    noBtn.addEventListener('click', moveButton); // just in case someone taps it
+    // keep it responsive when rotating/resizing
+    window.addEventListener('resize', () => moveButton());
+  </script>
+</body>
+</html>
